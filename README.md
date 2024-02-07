@@ -1,6 +1,5 @@
-<!-- [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/xeonvs/PySSHHelper?logo=github)](https://github.com/xeonvs/PySSHHelper/releases) -->
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/xeonvs/PySSHHelper?logo=github)](https://github.com/xeonvs/PySSHHelper/releases) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 <!-- [![Pypi_Version](https://img.shields.io/pypi/v/PySSHHelper.svg)](https://pypi.python.org/pypi/PySSHHelper) -->
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 <!-- [![Downloads](https://static.pepy.tech/personalized-badge/PySSHHelper?period=total&units=international_system&left_color=black&right_color=blue&left_text=Downloads)](https://pepy.tech/project/PySSHHelper) -->
 
 Please note that the project is in beta phase. Please report any issues you encounter or suggestions you have. We will do our best to address them quickly. Contributions are very welcome!
