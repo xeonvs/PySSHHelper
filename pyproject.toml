@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "PySSHHelper"
+version = "0.1.0"
+description = "Python library for executing commands interactively over SSH including sudo su - priveleges"
+authors = ["Max <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "Development Status :: Beta",
+    "Operating System :: OS Independent",
+    "Topic :: Internet",
+    "Topic :: Security :: Cryptography",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+[tool.poetry.urls]
+Homepage = "https://github.com/xeonvs/PySSHHelper"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+paramiko = "^3.4"
+
+[tool.poetry.group.tests]
+optional = true
+
+[tool.poetry.group.tests.dependencies]
+pytest = "^7.4.4"
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"
