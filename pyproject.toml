@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "PySSHHelper"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python library for executing commands interactively over SSH including sudo su - priveleges"
 authors = ["Max <PySSHHelper@proton.me>"]
 license = "MIT"
