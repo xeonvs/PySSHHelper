@@ -2,9 +2,12 @@
 name = "PySSHHelper"
 version = "0.1.0"
 description = "Python library for executing commands interactively over SSH including sudo su - priveleges"
-authors = ["Max <your.email@example.com>"]
+authors = [
+    { name="Max", email="PySSHHelper@proton.me" },
+]
 license = "MIT"
 readme = "README.md"
+requires-python = ">=3.8"
 classifiers = [
     "Development Status :: Beta",
     "Operating System :: OS Independent",
@@ -21,6 +24,7 @@ classifiers = [
 
 [tool.poetry.urls]
 Homepage = "https://github.com/xeonvs/PySSHHelper"
+Issues = "https://github.com/xeonvs/PySSHHelper/issues"
 
 [tool.poetry.dependencies]
 python = "^3.8"
