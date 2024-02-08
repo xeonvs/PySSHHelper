@@ -2,9 +2,7 @@
 name = "PySSHHelper"
 version = "0.1.1"
 description = "Python library for executing commands interactively over SSH including sudo su - priveleges"
-authors = [
-    { name="Max", email="PySSHHelper@proton.me" },
-]
+authors = ["Max <PySSHHelper@proton.me>"]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.8"
