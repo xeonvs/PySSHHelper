@@ -3,6 +3,7 @@ import re
 import logging
 import paramiko
 import time
+from re import Pattern
 
 
 class SSHConnection:
@@ -11,7 +12,23 @@ class SSHConnection:
     def __init__(self, host: str, port: int, username_ssh: str, password_ssh: str,
                  username_sudo: str, password_sudo: str, exec_sleep_time: int = 1, ssh_timeout: int = 15,
                  prompt_shell: str = '$', prompt_sudo: str = '#',
-                 verbose_ssh: bool = False, verbose: bool = False):
+                 verbose_ssh: bool = False, verbose: bool = False) -> object:
+        """
+        Represents interactive SSH shell and SFTP.
+
+            :param host: remote server address
+            :param port:  ssh port
+            :param username_ssh: ssh login
+            :param password_ssh: shh password for interactive authentication, can be empty if key authentication used
+            :param username_sudo: login for sudo su - login, can be empty.
+            :param password_sudo: password for sudo
+            :param exec_sleep_time: loop sleep time when command executing
+            :param ssh_timeout: common ssh client timeout.
+            :param prompt_shell: unprivileged shell prompt symbol.
+            :param prompt_sudo: privileged shell prompt symbol.
+            :param verbose_ssh: verbose logging only for ssh connection.
+            :param verbose: verbose logging.
+        """
         self.host = host
         self.port = port
         self.username_ssh = username_ssh
@@ -75,6 +92,7 @@ class SSHConnection:
     def elevate_privileges(self, prompt_start_timeout: int = 2):
         """
         Elevate privileges by sudo su - username command
+
         :param prompt_start_timeout: wait timeout before sudo prompt.
         """
         if self.ssh_client:
@@ -100,14 +118,15 @@ class SSHConnection:
         else:
             self.logger.warning("Not connected to SSH server")
 
-    def execute_command(self, command, buffer_size: int = 65535,
+    def execute_command(self, command: str, buffer_size: int = 65535,
                         wait_complete: bool = True, timeout: int = 60) -> str:
         """
+        :return: all output from console
+        :rtype: str
         :param command: shell command
         :param buffer_size: socket buffer size
         :param wait_complete: wait shell prompt after command execution
         :param timeout: output wait timeout
-        :return: all output from console
         """
         if self.ssh_client:
             if not self.ssh_shell:
@@ -150,13 +169,17 @@ class SSHConnection:
 
     @staticmethod
     def cleanup_escape_codes(text: str) -> str:
-        """Remove escape codes from the text using the pre-compiled pattern"""
+        """
+        Remove escape codes from the text using the pre-compiled pattern
+        :param text: text string
+        :return: clean string
+        """
         clean_text = SSHConnection.ESCAPE_PATTERN.sub('', text)
         return clean_text
 
     def sftp_get(self, remote_path, local_path):
         """
-        Get file from remote server
+            Get file from remote server
         """
         if self.ssh_client:
             sftp_client = self.ssh_client.open_sftp()
@@ -176,9 +199,12 @@ class SSHConnection:
         else:
             self.logger.warning("Not connected to SSH server")
 
-    def list_directory(self, path: str = '.'):
+    def list_directory(self, path: str = '.') -> list[str]:
         """
-            List files in directory path on remote server
+            List files in a directory path on a remote server
+            :rtype: list
+            :param path: path
+            :return: file list
         """
         if self.ssh_client:
             sftp_client = self.ssh_client.open_sftp()
@@ -189,6 +215,9 @@ class SSHConnection:
             self.logger.warning("Not connected to SSH server")
 
     def close(self):
+        """
+            Close all connections
+        """
         if self.ssh_client:
             self.ssh_client.close()
             self.logger.info("Disconnected from SSH server")
