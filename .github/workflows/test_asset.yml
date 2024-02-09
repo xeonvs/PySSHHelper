@@ -1,5 +1,10 @@
 name: Upload Python Package to asset
 
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
 permissions:
   contents: read
 
