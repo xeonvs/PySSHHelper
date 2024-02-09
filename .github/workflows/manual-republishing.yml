@@ -25,7 +25,8 @@ jobs:
     - name: GitHub Tag Name example
       run: |
          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-         echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+         echo "Tag name from github.ref_name: ${{ github.ref_name }}"
+         echo "Tag name from github.tag_name: ${{ github.tag_name }}"
 
     - name: Install dependencies
       run: |
@@ -42,12 +43,6 @@ jobs:
     #  with:
     #    user: __token__
     #    password: ${{ secrets.PYPI_API_TOKEN }}
-
-    #- name: Extract Asset Name
-      #run: |
-      #      export PKG=$(ls dist/ | grep whl)
-      #      set -- $PKG
-      #      echo "name=$1" >> $GITHUB_ENV
 
     - name: Create and upload release with asset to GitHub
       id: upload-release-asset
