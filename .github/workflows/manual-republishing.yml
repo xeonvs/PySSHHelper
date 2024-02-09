@@ -43,12 +43,7 @@ jobs:
     #    user: __token__
     #    password: ${{ secrets.PYPI_API_TOKEN }}
 
-    - name: Extract Asset Name
-      run: |
-            ls dist/* > asset_paths.txt
-            sed -i ':a;N;$!ba;s/\n/\\n/g' asset_paths.txt
-            echo "files_names=$(cat asset_paths.txt)" >> $GITHUB_ENV
-
+    #- name: Extract Asset Name
       #run: |
       #      export PKG=$(ls dist/ | grep whl)
       #      set -- $PKG
@@ -60,5 +55,4 @@ jobs:
       with:
         draft: true
         generate_release_notes: true
-        files: |
-                dist/${{ env.name }}
+        files: dist/*
