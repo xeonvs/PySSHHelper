@@ -1,4 +1,4 @@
-name: Upload Python Package to asset
+name: Build & Upload Python Package to Asset
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
