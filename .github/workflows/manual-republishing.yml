@@ -43,25 +43,22 @@ jobs:
     #    user: __token__
     #    password: ${{ secrets.PYPI_API_TOKEN }}
 
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: ${{ github.ref_name }}
-        release_name: ${{ github.ref_name }}
-        draft: true
-        prerelease: false
-
     - name: Extract Asset Name
       run: |
-            export PKG=$(ls dist/ | grep whl)
-            set -- $PKG
-            echo "name=$1" >> $GITHUB_ENV
+            ls dist/* > asset_paths.txt
+            sed -i ':a;N;$!ba;s/\n/\\n/g' asset_paths.txt
+            echo "files_names=$(cat asset_paths.txt)" >> $GITHUB_ENV
 
-    - name: Upload Release Asset (whl) to GitHub
+      #run: |
+      #      export PKG=$(ls dist/ | grep whl)
+      #      set -- $PKG
+      #      echo "name=$1" >> $GITHUB_ENV
+
+    - name: Create and upload release with asset to GitHub
       id: upload-release-asset
       uses: softprops/action-gh-release@v1
       with:
-        files: dist/${{ env.name }}
+        draft: true
+        generate_release_notes: true
+        files: |
+                dist/${{ env.name }}
